@@ -9,7 +9,7 @@ resource "kubernetes_namespace_v1" "sealed-secrets" {
   }
 }
 
-resource "kubernetes_secret" "sealed-secrets-key" {
+resource "kubernetes_secret_v1" "sealed-secrets-key" {
   depends_on = [kubernetes_namespace_v1.sealed-secrets]
   type       = "kubernetes.io/tls"
 
@@ -35,7 +35,7 @@ resource "helm_release" "sealed_secrets" {
   repository = "oci://registry-1.docker.io/bitnamicharts"
   chart      = "sealed-secrets"
   namespace  = "sealed-secrets"
-  version    = "2.18.1"
+  version    = "2.19.1"
 
   values = [var.helm_values]
 
